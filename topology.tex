@@ -1,0 +1,438 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{example}{Example}[theorem]
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\fdiff}{f^{\prime}}
+\newcommand{\interior}{\text{int}}
+\newcommand{\dom}{\text{Dom}}
+\newcommand{\ran}{\text{Ran}}
+
+\title{Topology Notes}
+\date{March 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Motivation}
+
+\begin{definition}
+    Let $X$ be a set. $\tau \subseteq \mathcal{P}(X)$ is said to be a \textbf{topology on $X$} if
+
+    \begin{enumerate}
+        \item $\varnothing, X \in \tau$
+        \item $\tau$ is closed under unions.
+        \item $\tau$ is closed under finite intersections. 
+    \end{enumerate}
+\end{definition}
+
+Equivalently, we can define a topology using its closed sets. See Exercise 17.1 in
+Monkres Topology.
+
+
+
+
+\begin{example}
+    A topology where the only open sets are $\varnothing$ and $X$ is called the \textbf{trivial (indiscrete) topology}.
+\end{example}
+
+\begin{example}
+    Let $X$ be a set. Let $\tau$ be the set of all cofinite subsets of $X$.
+    $(X,\tau)$ is called the \textbf{cofinite (finite complement)} topology
+    of $X$.
+\end{example}
+
+Similar to the example above, we can define an open set as having a countable
+complement and get a topology on $X$.
+
+\begin{definition}
+    Given an ordered set $X$, a subset $Y$ of $X$ is said to be \textbf{convex}
+    if for all $a < b$ in $Y$, $(a,b) \subseteq Y$.
+\end{definition}
+
+Intervals and rays are convex in $X$.
+
+\newpage
+
+\section{Basis of a Topology}
+
+\begin{definition}
+    Let $X$ be a set. A basis $\mathcal{B}$ for $(X,\tau)$ is a collection of subsets
+    of $X$ such that
+
+    \begin{enumerate}
+        \item $\forall x \in X: \exists B \in \mathcal{B}: x \in B$
+        \item $\forall x \in X: \forall B_{1},B_{2} \in \mathcal{B}: x \in B_{1} \cap B_{2} \implies
+        (\exists B_{3} \in \mathcal{B}: x \in B_{3} \land B_{1} \cap B_{2} \subseteq B_{3})$
+    \end{enumerate}
+\end{definition}
+
+Given a basis $\mathcal{B}$, we can generate a topology of $\tau$ by defining the open sets
+as in the following lemma:
+
+\begin{lemma}
+    $A \in X$ is open if and only if $\forall a \in A: \exists U \in \tau: a \in U \land U \subseteq A$.
+
+    In other words, $A$ is open if and only if every point in $A$ is contained in an open ball
+    that's contained in $A$.
+\end{lemma}
+\begin{proof}
+    The forward implication is trivial, just pick $U = A$. Let's now prove the reverse implication.
+    Assume a set $A$ satisfies the condition on the right-hand side. Let $U_{a}$ be the open set
+    containing $a$. Notice that $A = \bigcup_{a \in A} U_{a}$, so $A$ is a union of open sets and
+    therefore open.
+\end{proof}
+
+\newpage
+
+\section{Subspaces}
+
+\begin{lemma}
+    Let $X$ be an ordered set with the order topology and $Y$ be a convex subset of $X$.
+    Then, the order topology on $Y$ is the same topology as the one $Y$ inherits as a subspace
+    of $X$.
+\end{lemma}
+
+
+
+
+\newpage
+
+\section{Continuity}
+
+The continuity of a function $f: X \xrightarrow{} Y$ doesn't depend only on the function
+but on the topologies put on $X$ and $Y$.
+
+\begin{definition}
+    A function $f: X \xrightarrow{} Y$ is \textbf{continuous} if it preimages
+    open sets of $Y$ into open sets of $X$. More formally, 
+\end{definition}
+
+If $\mathcal{B}$ is a basis for $Y$, it suffices to show that $f$ preimages
+every $B \in \mathcal{B}$ to an open set of $X$.
+
+
+
+\newpage
+
+\section{Homeomorphisms}
+
+\begin{definition}
+    Let $X,Y$ be topological spaces and $f: X \xrightarrow{} Y$ be a homeomorphism.
+\end{definition}
+
+\begin{definition}
+    Let $X,Y$ be topological spaces $f: X \xrightarrow{} Y$ be an
+    injective continuous function. If $f^{\prime}: X \xrightarrow{} f(X)$
+    is an homeomorphism, $f$ is called a \textbf{topological imbedding}.
+\end{definition}
+
+\begin{lemma}
+    Let $X,Y$ be metric spaces and $f: X \xrightarrow{} Y$ be an isometry.
+    Then, $f$ is an imbedding.
+\end{lemma}
+\begin{proof}
+    $f$ is (uniformly) continuous and injective. Clearly, every restriction of
+    $f$ is also continuous.
+\end{proof}
+
+\begin{lemma}
+    Let $f: X \xrightarrow{} Y$ be a homeomorphism and $Z$ be a subspace of $X$.
+    Then, $f$ restricred to $Z$ is still an homeomorphism.
+\end{lemma}
+
+\begin{lemma}
+    $[a,b] \simeq (c,d)$
+\end{lemma}
+\begin{proof}
+    Assume by contradiction that there exists a homeomorphism 
+    $f: [a,b] \xrightarrow{} (c,d)$.
+
+
+\end{proof}
+
+\newpage
+
+\section{Closed Sets}
+
+
+\begin{lemma}
+    If $A$ is closed in $Y$ and $Y$ is closed in $X$,
+    $A$ is closed in $X$.
+\end{lemma}
+
+
+\newpage
+
+\section{Connectedness}
+
+\begin{definition}
+    Let $(X,\tau)$ be a topological space. $X$ is said to be \textbf{disconnected}
+    if there are disjoint open sets $U,V$ such $U \cup V = X$.
+\end{definition}
+
+\begin{definition}
+    $X$ is said to be \textbf{connected} if it's not disconnected.
+\end{definition}
+
+\begin{lemma}
+    $X$ is connected if and only if the only clopen sets in $X$ are $\varnothing$ and $X$.
+\end{lemma}
+
+\begin{definition}
+    $X$ is said to be separated to disjoint sets $A,B$ if $A,B$ don't contain each other's limit points
+    and $A \cap B = X$.
+\end{definition}
+
+\begin{lemma}
+    $X$ is connected if and only if it doesn't separate into two sets $A,B$.
+\end{lemma}
+
+\begin{lemma}
+    Let $C$ and $D$ be a separation of $X$ and $Y$ be a connected subspace of $X$.
+    Then, $Y$ lies entirely in $C$ or $D$.
+\end{lemma}
+\begin{proof}
+    Notice that $C \cap Y$ and $D \cap Y$ are disjoint open sets in $Y$ and notice
+    that their union is $Y$.
+\end{proof}
+
+\begin{lemma}
+    The union of a collection of subspaces $A_{\alpha}$ that have a point
+    in common is connected.
+\end{lemma}
+
+
+
+\subsection{Exercises}
+
+Let $\tau, \tau^{\prime}$ be two topologies on $X$. If $\tau$ is not connected, $\tau^{\prime}$ is not connected. 
+If $\tau^{\prime}$ is connected, $\tau$ is also connected.
+
+\begin{lemma}
+    Let $A_{n}$ be a sequence of connected subspaces of $X$. Assume that
+    $A_{n} \cap A_{n+1} \neq \varnothing$. Prove that $A = \bigcup_{n = 1}^{\infty} A_{n}$
+    is connected.
+\end{lemma}
+
+The intuition is the following: the common point between consecutive subspaces acts
+as a bridge. I think this proof can be formalized by using contradiction and then
+getting two points in two sets, then arguing they have to be connected.
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $X$ be a topological space and $A_{\alpha \in I}$ be a collection
+    of connected subspaces. Let $A$ be a connected subspace with a non-trivial
+    intersection with all $A_{\alpha}$. Then, $A \cup A_{\alpha \in I}$ is
+    also connected.
+\end{lemma}
+
+Here, it's as if we have a single connection point connecting all the other
+sets together.
+
+\begin{proof}
+    
+\end{proof}
+
+Let $X$ be an infinite set in the cofinite topology. Then, $X$ is connected since
+otherwise $X$ would be finite.
+
+\begin{definition}
+    A space is \textbf{totally disconnected} if the only connected subspaces
+    are one-point sets.
+\end{definition}
+
+Notice that if we equip a set with the discrete topology, it's totally disconnected.
+
+
+\newpage
+
+\section{Connected Subspaces of the Real Line}
+
+\begin{definition}
+    A simply ordered set $L$ containing more than one element is called a \textbf{linear continuum}
+    if the following hold:
+
+    \begin{enumerate}
+        \item $L$ has the least upper bound property.
+        \item[Archimedean Property] For any two elements $x < y$, $\exists z \in L: x < z < y$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    If $L$ is a linear continuum in the order topology, every convex
+    subspace of $L$ is connected.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    $(0,1), [0,1), [0,1]$ are not homemorphic.
+\end{lemma}
+\begin{proof}
+    Consider a homemorphism $f: [0,1) \xrightarrow{} (0,1)$.
+    Then, the restriction of this homemorphism on $(0,1)$
+    is still an homemorphism. However, the image of this map is no longer
+    connected.
+
+    We can use a similar argument for the rest of the arguments.
+\end{proof}
+
+\newpage
+
+\section{Compactness}
+
+\begin{definition}
+    Let $X$ be a topological space. $X$ is called \textbf{separable} if
+    it has a countable dense subset.
+\end{definition}
+
+\newpage
+
+\section{Convergence in Topology}
+
+\begin{definition}
+    A sequence $x_{n}$ is said to converge to $x$ if for every neighborhood
+    $U$ of $x$, there's some $N \in \N: \forall n \geq N: x_{n} \in U$.
+\end{definition}
+
+\newpage
+
+\section{Separation Axioms}
+
+The separation axioms try to mimic the properties of metric spaces.
+
+\begin{definition}
+    A topological space is said to be $T_{0}$ if any two distinct points in $X$ are topologically distinguisable.
+\end{definition}
+
+\begin{definition}
+    A topological space $X$ satisfies $T_{1}$ if for any $x,y \in X$ we can find 
+    a neighborhood $U$ of $x$ such that $y \notin U$.
+\end{definition}
+
+\begin{lemma}
+    A topological space $X$ satisfies $T_{1}$ if and only if every singleton set is closed.
+\end{lemma}
+
+\begin{corollary}
+    If a topological space $X$ satisfies $T_{1}$, every finite point set of $X$ is closed.
+\end{corollary}
+
+\begin{theorem}
+    Let $X$ be a space satisfying $T_{1}$ and $A \subseteq X$. Then, $x$ is a
+    limit point of $A$ if and only if every neighborhood of $x$ contains 
+    infinitely many points of $A$.
+\end{theorem}
+\begin{proof}
+    Assume $x$ is a limit point of $A$ and assume by contradiction that there's
+    some neighborhood $U$ of $x$ such that $U$ contains finitely many points of $A$.
+\end{proof}
+
+\begin{definition}
+    A topological space $X$ satisfies $T_{2}$ or is \textbf{Hausdorff} if for any $x,y \in X$ we can find disjoint open
+    sets $U,V$ such that $x \in U$ and $y \in V$.
+\end{definition}
+
+\begin{lemma}
+    Sequential limits in Hausdorff spaces are unique.
+\end{lemma}
+\begin{proof}
+    Let $x_{n}$ be a sequence in $X$ and assume $x_{n}$ converges to $x$. Let $y \neq x$.
+    Then, there's some $U_{x}$, $U_{y}$ disjoint neighborhoods of $x$ and $y$. Since $x_{n}$
+    converges to $x$, there's some $N \in \N: \forall n \geq N: x_{n} \in U_{x} \implies x_{n} \notin U_{y}$.
+    Thus, $x_{n}$ doesn't converge to $y$.
+\end{proof}
+
+\begin{lemma}
+    Every simply ordered set is a Hausdorff space in the order topology.
+\end{lemma}
+
+\begin{lemma}
+    Hausdorff spaces are closed under products.
+\end{lemma}
+
+\begin{lemma}
+    Subspaces of Hausdorff spaces are Hausdorff.
+\end{lemma}
+
+\begin{lemma}
+    $X$ is Hausdorff if and only if the diagonal $\Delta = \{ (x,x): x \in X \}$
+    is closed in $X \times X$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+
+\begin{definition}
+    A topological space $X$ satisfies $T_{3}$ or is \textbf{regular} if for any point $a$ and closed set
+    $B \subseteq X$ there are disjoint open sets $U,V$ such that $a \in U$ and $B \subseteq V$.
+\end{definition}
+
+\begin{example}
+    The Zariski topology on $\R$ is not Hausdorff.
+\end{example}
+
+\begin{definition}
+    A topological space $X$ satisfies $T_{4}$ or is \textbf{normal} if for any two closed sets
+    $A,B \subseteq X$ there are disjoint open sets $U,V$ such that $A \subseteq U$ and $B \subseteq V$.
+\end{definition}
+
+\begin{lemma}
+    
+\end{lemma}
+
+\begin{lemma}
+    Every metric space is normal.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+\section{Countability Axioms}
+
+\begin{definition}
+    A topological space $X$ is said to be \textbf{second-countable} if it
+    has a countable basis.
+\end{definition}
+
+Not every metric space has a second-countable basis. 
+
+\begin{theorem}
+    Assume $X$ is second-countable. Then,
+
+    \begin{enumerate}
+        \item Every open covering of $X$ has a countable subcover.
+        \item $X$ is separable.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+
+\end{document}
